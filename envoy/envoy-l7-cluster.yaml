@@ -20,6 +20,10 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
+
+              - match: { prefix: "/admin" }
+                direct_response: {status: 403, body: {inline_string: "this is not for you kid!!"}}
+
               - match: { prefix: "/backend-service-1" }
                 route: { cluster: service-cluster-1 }
               - match: { prefix: "/backend-service-2" }
